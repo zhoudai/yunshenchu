@@ -1,0 +1,336 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 让 <img class="object-cover"> 在不改变元素位置的前提下移动显示区域 */
+@keyframes object-pan-x {
+  0% { object-position: 50% 50%; }
+  50% { object-position: 0% 50%; }
+  100% { object-position: 50% 50%; }
+}
+
+.animate-object-pan-x {
+  animation: object-pan-x 30s ease-in-out infinite;
+  will-change: object-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-object-pan-x {
+    animation: none;
+  }
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 30% 5%;
+    --foreground: 210 100% 98%;
+
+    --card: 220 25% 8%;
+    --card-foreground: 210 100% 98%;
+
+    --popover: 220 25% 8%;
+    --popover-foreground: 210 100% 98%;
+
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 30% 5%;
+
+    --secondary: 280 80% 60%;
+    --secondary-foreground: 210 100% 98%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 210 40% 70%;
+
+    --accent: 280 80% 60%;
+    --accent-foreground: 210 100% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 100% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 195 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Tech gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(195 100% 50%), hsl(280 80% 60%));
+    --gradient-glow: linear-gradient(135deg, hsl(195 100% 50% / 0.2), hsl(280 80% 60% / 0.2));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.3);
+    --shadow-glow-strong: 0 0 60px hsl(195 100% 50% / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 210 100% 98%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 220 30% 5%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 210 100% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 195 100% 50%;
+  }
+
+  .dark {
+    --background: 220 30% 5%;
+    --foreground: 210 100% 98%;
+    --card: 220 25% 8%;
+    --card-foreground: 210 100% 98%;
+    --popover: 220 25% 8%;
+    --popover-foreground: 210 100% 98%;
+    --primary: 195 100% 50%;
+    --primary-foreground: 220 30% 5%;
+    --secondary: 280 80% 60%;
+    --secondary-foreground: 210 100% 98%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 210 40% 70%;
+    --accent: 280 80% 60%;
+    --accent-foreground: 210 100% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 100% 98%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 195 100% 50%;
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 210 100% 98%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 220 30% 5%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 210 100% 98%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 195 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scan {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scan-vertical {
+  0%, 100% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes grid-flow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-scan {
+  animation: scan 2s ease-in-out infinite;
+}
+
+@keyframes scan-horizontal {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scan-horizontal {
+  animation: scan-horizontal 3s ease-in-out infinite;
+}
+
+/* 扩散波动动画 */
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+/* 持续扩散动画 */
+@keyframes ripple-continuous {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple-continuous {
+  animation: ripple-continuous 2s ease-out infinite;
+}
+
+/* 外层圈脉冲动画 */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s ease-in-out infinite;
+}
+
+/* 淡出动画 */
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.animate-fade-out {
+  animation: fade-out 0.8s ease-out forwards;
+}
+
+/* 淡入动画 */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* 方块形图片淡入动画 */
+@keyframes square-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotateY(-15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.animate-square-fade-in {
+  animation: square-fade-in 0.8s ease-out forwards;
+}
+
+/* 方块形图片淡出移动动画 */
+@keyframes square-fade-out-move {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateY(-30px) rotateY(10deg);
+  }
+}
+
+.animate-square-fade-out-move {
+  animation: square-fade-out-move 1.2s ease-out forwards;
+}
